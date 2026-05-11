@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlQalam Software — Mobile Apps Built with Purpose</title>
+  <meta name="description" content="AlQalam Software builds thoughtful mobile apps with creativity, speed, and AI. Home of Quran Alarm. We also build custom apps for clients worldwide." />
+  <link rel="icon" type="image/png" href="icons/AlQalamSoftware-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #22c55e;
+      --green-dark: #16a34a;
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo span { font-size: 1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--green); color: #000; font-weight: 600;
+      padding: 8px 18px; border-radius: 8px; text-decoration: none;
+      font-size: 0.875rem; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--green-dark); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(34,197,94,0.12) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+      color: var(--green); padding: 6px 14px; border-radius: 99px;
+      font-size: 0.8rem; font-weight: 600; margin-bottom: 2rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.03em; margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--green); }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted); max-width: 560px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: #000; font-weight: 700;
+      padding: 14px 28px; border-radius: 12px; text-decoration: none;
+      font-size: 1rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--green-dark); color: #fff; transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--surface2); color: var(--text); font-weight: 600;
+      padding: 14px 28px; border-radius: 12px; text-decoration: none;
+      font-size: 1rem; border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: translateY(-1px); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 96px 5%; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; color: var(--green);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.05rem; color: var(--muted); max-width: 560px; margin-bottom: 3rem;
+    }
+
+    /* ── QURAN ALARM (FEATURED) ── */
+    .app-featured {
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 64px 5%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .app-featured-text .app-tag {
+      display: inline-block;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25);
+      color: var(--green); padding: 4px 12px; border-radius: 99px;
+      font-size: 0.75rem; font-weight: 600; margin-bottom: 1.25rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .app-featured-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 0.5rem;
+    }
+    .app-featured-text .ar-title {
+      font-size: 1.4rem; color: var(--green); font-weight: 700;
+      margin-bottom: 1.25rem; direction: rtl;
+    }
+    .app-featured-text p { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; }
+    .feature-list { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 10px; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.95rem; color: var(--text);
+    }
+    .feature-list li::before {
+      content: "✦"; color: var(--green); font-size: 0.7rem; margin-top: 4px; flex-shrink: 0;
+    }
+    .store-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); padding: 12px 20px; border-radius: 12px;
+      text-decoration: none; transition: all 0.2s; font-size: 0.875rem;
+    }
+    .store-btn:hover { border-color: var(--green); color: var(--green); transform: translateY(-1px); }
+    .store-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .store-btn-label { display: flex; flex-direction: column; }
+    .store-btn-label small { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .store-btn-label strong { font-size: 0.9rem; font-weight: 700; }
+
+    .app-screenshots {
+      display: flex; gap: 16px; justify-content: center; align-items: flex-end;
+    }
+    .screenshot-wrap {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+    }
+    .screenshot-wrap img { display: block; width: 150px; height: auto; }
+    .screenshot-wrap.main img { width: 180px; }
+    .screenshot-wrap.secondary { opacity: 0.85; transform: translateY(24px); }
+
+    /* ── FEATURES GRID ── */
+    .features-section { text-align: center; }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      text-align: left; transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(34,197,94,0.4); }
+    .feature-icon {
+      width: 44px; height: 44px; background: rgba(34,197,94,0.1);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 1rem;
+    }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── SERVICES ── */
+    .services-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .service-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem; transition: all 0.2s;
+    }
+    .service-card:hover { border-color: rgba(34,197,94,0.4); transform: translateY(-2px); }
+    .service-num {
+      font-size: 2rem; font-weight: 800; color: rgba(34,197,94,0.3);
+      margin-bottom: 1rem; line-height: 1;
+    }
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-section { text-align: center; }
+    .contact-inner { max-width: 560px; margin: 0 auto; }
+    .contact-inner p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green); color: #000; font-weight: 700;
+      padding: 16px 32px; border-radius: 12px; text-decoration: none;
+      font-size: 1rem; transition: all 0.2s;
+    }
+    .contact-link:hover { background: var(--green-dark); color: #fff; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--green); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .app-featured { grid-template-columns: 1fr; gap: 3rem; }
+      .app-screenshots { order: -1; }
+      .screenshot-wrap.secondary { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="icons/AlQalamSoftware-logo.png" alt="AlQalam Software" />
+      <span>AlQalam Software</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Work With Us</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Mobile App Studio</div>
+    <h1>Apps Built with<br /><span>Purpose &amp; Craft</span></h1>
+    <p>We build thoughtful mobile apps — fast, creative, and AI-ready. From consumer products used by thousands, to custom apps tailored for your business.</p>
+    <div class="hero-actions">
+      <a href="#apps" class="btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>
+        See Our Apps
+      </a>
+      <a href="#services" class="btn-secondary">Build Your App</a>
+    </div>
+  </section>
+
+  <!-- QURAN ALARM FEATURED APP -->
+  <section id="apps" style="padding-top: 0;">
+    <div style="text-align:center; margin-bottom: 3rem;">
+      <p class="section-label">Our Apps</p>
+      <h2 class="section-title">Apps People Love to Use</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">Carefully crafted products used by thousands — built with attention to detail, performance, and real user needs.</p>
+    </div>
+
+    <div class="app-featured">
+      <div class="app-featured-text">
+        <span class="app-tag">Featured App · iOS &amp; Android</span>
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:0.5rem;">
+          <img src="icons/iosQuranAlarm.png" alt="Quran Alarm icon" style="width:56px;height:56px;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,0.4);" />
+          <h2>Quran Alarm</h2>
+        </div>
+        <p class="ar-title">المنبّه القرآني</p>
+        <p>Wake up to the words of Allah. Set alarms linked to Fajr, Dhuhr, Asr, Maghrib, or Isha — or choose your own time. Select any Surah and Ayah, or let the app choose for you.</p>
+        <ul class="feature-list">
+          <li>Alarm sounds tied to Islamic prayer times</li>
+          <li>Any Surah, Any Ayah — or fully random selection</li>
+          <li>World-renowned reciters (Maher Al-Muaiqly, At-Tablawi &amp; more)</li>
+          <li>Accurate prayer times using 22 calculation methods</li>
+          <li>Full Arabic &amp; English interface</li>
+          <li>Your location never leaves your device</li>
+        </ul>
+        <div class="store-buttons">
+          <a href="https://apps.apple.com/app/id6745786424" class="store-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span class="store-btn-label">
+              <small>Download on the</small>
+              <strong>App Store</strong>
+            </span>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.alqalamsoftware.quranalarm" class="store-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2l12.19-12.2L12.9 8.3 3.18 23.76zm17.29-10.46L17.6 11.8l-3.44 3.44 3.44 3.44 2.88-1.63c.82-.46.82-1.99-.01-2.55zM3.1.26C2.77.44 2.55.8 2.55 1.27v21.47c0 .47.22.83.55 1.01l.1.06 12.03-12.03v-.27L3.2.2l-.1.06zm9.8 9.05L4.71.12l-.01-.01 8.2 9.2z"/></svg>
+            <span class="store-btn-label">
+              <small>Get it on</small>
+              <strong>Google Play</strong>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="app-screenshots">
+        <div class="screenshot-wrap secondary">
+          <img src="assets/images/screen2.png" alt="Quran Alarm prayer setup screen" />
+        </div>
+        <div class="screenshot-wrap main">
+          <img src="assets/images/screen1.png" alt="Quran Alarm main screen" />
+        </div>
+        <div class="screenshot-wrap secondary">
+          <img src="assets/images/screen3.png" alt="Quran Alarm settings screen" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP FEATURES -->
+  <section class="features-section">
+    <p class="section-label" style="text-align:center;">Why Quran Alarm</p>
+    <h2 class="section-title" style="text-align:center; margin: 0 auto 1rem;">Every Detail Considered</h2>
+    <p class="section-subtitle" style="margin: 0 auto 3rem;">Built for daily use by Muslims everywhere — from Cairo to Toronto.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🕌</div>
+        <h3>Prayer-Linked Alarms</h3>
+        <p>Set alarms before or after any of the 5 daily prayers. Times update automatically when you travel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <h3>Any Verse You Choose</h3>
+        <p>Select a specific Surah and Ayah, or let the app pick random verses from the beginning, middle, or end of the Quran.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎙</div>
+        <h3>Renowned Reciters</h3>
+        <p>Choose from world-famous reciters. Audio downloaded fresh for each alarm and cached for offline use.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>Your location is used only to calculate prayer times on your device. Never sent to any server. No account needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Arabic &amp; English</h3>
+        <p>Full RTL Arabic support alongside English, French, and Urdu — the app speaks your language.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💸</div>
+        <h3>One-Time Purchase</h3>
+        <p>No subscriptions. Pay once and use forever — after a generous 7-day free trial.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services-section">
+    <div class="services-inner">
+      <p class="section-label">For Clients</p>
+      <h2 class="section-title">We Build Your App</h2>
+      <p class="section-subtitle">Have an idea? We turn it into a polished, production-ready app — with creativity, speed, and the right technology for the job.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <h3>iOS &amp; Android Development</h3>
+          <p>Native apps built with Swift (iOS) and modern Android stack. Creative ideas turned into polished, App Store-ready products — delivered fast.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <h3>Islamic &amp; Arabic Expertise</h3>
+          <p>Specialized experience with RTL layouts, Islamic APIs (prayer times, Quran data), and Arabic-speaking markets — a rare skill few studios offer.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <h3>AI-Powered Apps</h3>
+          <p>Integrate large language models, voice, or computer vision into your app. We bring AI capabilities to mobile in practical, user-facing ways.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <h3>Consultation &amp; Rescue</h3>
+          <p>Stuck on a feature? Have an existing app that needs fixing, improving, or submitting to the App Store? We can step in and help.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Let's Build Something</h2>
+      <p>Whether you have a fully defined project or just an early idea — reach out and let's talk.</p>
+      <a href="mailto:info@alqalamsoftware.com" class="contact-link">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@alqalamsoftware.com
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 AlQalam Software. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="https://www.alqalamsoftware.com/quran-alarm-privacy-policy">Privacy Policy</a>
+      <a href="#apps">Apps</a>
+      <a href="#services">Services</a>
+    </div>
+  </footer>
+
+</body>
+</html>
