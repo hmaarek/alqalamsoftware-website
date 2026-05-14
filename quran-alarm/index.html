@@ -98,7 +98,8 @@
     }
 
     /* ── Video ── */
-    .video-frame {
+    .video-link {
+      display: block;
       width: 100%;
       max-width: 280px;
       border-radius: 28px;
@@ -108,10 +109,27 @@
         0 24px 64px rgba(0,0,0,0.7),
         0 0 60px rgba(34,197,94,0.15);
       background: #111;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
     }
-    .video-frame video {
+    .video-link video {
       width: 100%;
       display: block;
+    }
+    .video-hint {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 4px 12px;
+      border-radius: 50px;
+      white-space: nowrap;
+      pointer-events: none;
+      backdrop-filter: blur(6px);
+      direction: ltr;
     }
 
     /* ── Feature cards ── */
@@ -148,35 +166,6 @@
       font-size: 0.78rem;
       color: var(--muted);
       line-height: 1.5;
-      font-family: 'SF Arabic', 'Geeza Pro', sans-serif;
-    }
-
-    /* ── Price badge ── */
-    .price-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.3);
-      border-radius: 50px;
-      padding: 8px 18px;
-      direction: rtl;
-    }
-    .price-badge .original {
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-decoration: line-through;
-      direction: ltr;
-    }
-    .price-badge .now {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--green);
-      direction: ltr;
-    }
-    .price-badge .label {
-      font-size: 0.82rem;
-      color: #ccc;
       font-family: 'SF Arabic', 'Geeza Pro', sans-serif;
     }
 
@@ -238,11 +227,12 @@
       <p class="en">Wake up to the Quran, not a jarring alarm</p>
     </div>
 
-    <div class="video-frame">
+    <a class="video-link" href="https://apple.co/4ucBy0l">
       <video autoplay muted loop playsinline preload="auto">
         <source src="promo.mp4" type="video/mp4">
       </video>
-    </div>
+      <span class="video-hint">Tap to download</span>
+    </a>
 
     <div class="features">
       <div class="feature">
@@ -273,12 +263,6 @@
           <span>حدد أيام التكرار، واضبط وقت المنبه أو اربطه بوقت الصلاة مباشرة</span>
         </div>
       </div>
-    </div>
-
-    <div class="price-badge">
-      <span class="label">عرض محدود</span>
-      <span class="now">$0.99</span>
-      <span class="original">$2.99</span>
     </div>
 
     <div class="cta-wrap">
